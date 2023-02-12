@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace RPGHeroes.Item.Weapon
 {
-    {
        public enum Weapons
         {
             Axe,
@@ -16,6 +15,5 @@ namespace RPGHeroes.Item.Weapon
             Staff,
             Sword,
             Wand
-        }
-    }
+        } 
 }
