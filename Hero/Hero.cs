@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace RPGHeroes.Hero
 {
-    internal class Hero
+    protected abstract class Hero
     {
         public string heroName { get; set; }
         public int level { get; set; }
         public int levelAttributes { get; set; }
         public int Equipment { get; set; }
-        public List<int>[] validWeaponTypes { get; set; }
-        public List<int>[] validArmorTypes { get; set; }
+        public List<int> validWeaponTypes { get; set; }
+        public List<int> validArmorTypes { get; set; }
         
         public Hero(string heroName)
         {
             this.heroName = heroName;
+            this.level = 1;
         }
     }
 }
