@@ -14,6 +14,10 @@ namespace RPGHeroes.Hero
         public int Equipment { get; set; }
         public List<int>[] validWeaponTypes { get; set; }
         public List<int>[] validArmorTypes { get; set; }
-
+        
+        public Hero(string heroName)
+        {
+            this.heroName = heroName;
+        }
     }
 }
