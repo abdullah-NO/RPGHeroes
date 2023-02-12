@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace RPGHeroes.Item.Weapon
 {
-    internal class WeaponsSelection
     {
-        enum Weapons
+       public enum Weapons
         {
             Axe,
             Bow,
