@@ -8,7 +8,7 @@ namespace RPGHeroes.Item
 {
     public enum slot
     {
-        Weapon,
+        WeaponSlot,
         Head,
         Body,
         Legs

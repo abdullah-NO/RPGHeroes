@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Security;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RPGHeroes.Item.Armor;
+using RPGHeroes.Item.Weapon;
 
 namespace RPGHeroes.Hero.HeroClasses
 {
     internal class MageClass : Hero
     {
         public HeroAttribute mageAttribute = new();
-        public MageClass() : base("Abu The Mage")
+        public MageClass(string mageName) : base(mageName)
         {
-            mageAttribute.strength = 1;
+            
+            mageAttribute.strength = 1; 
             mageAttribute.dexterity = 1;
             mageAttribute.intelligence = 8;
         }
-        private void IncreaseMageAttributesLevel()
+        private void IncreaseMageAttributesLevelByLevelUp()
         {
             mageAttribute.strength += 1;
             mageAttribute.dexterity += 1;
@@ -26,8 +21,24 @@ namespace RPGHeroes.Hero.HeroClasses
         }
         public override void LevelUp()
         {
-            base.level++;
-            IncreaseMageAttributesLevel();
+            level++;
+            IncreaseMageAttributesLevelByLevelUp();
+            throw new NotImplementedException();
+        }
+        public override void Equip(ArmorType chosenArmor)
+        {
+            if (chosenArmor == ArmorType.cloth)
+            {
+
+            }
+            throw new NotImplementedException();
+        }
+        public override void Equip(Weapons chosenWeapon)
+        {
+            if (chosenWeapon == Weapons.Staff || chosenWeapon == Weapons.Wand)
+            {
+
+            }
             throw new NotImplementedException();
         }
     }

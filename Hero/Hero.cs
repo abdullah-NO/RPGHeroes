@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RPGHeroes.Item.Armor;
+using RPGHeroes.Item.Weapon;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,5 +23,7 @@ namespace RPGHeroes.Hero
             this.level = 1;
         }
         public abstract void LevelUp();
+        public abstract void Equip(ArmorType armor);
+        public abstract void Equip(Weapons weapon);
     }
 }
