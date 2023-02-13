@@ -41,5 +41,6 @@ namespace RPGHeroes.Hero.HeroClasses
             }
             throw new NotImplementedException();
         }
+       
     }
 }
