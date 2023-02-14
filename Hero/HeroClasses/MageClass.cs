@@ -25,22 +25,6 @@ namespace RPGHeroes.Hero.HeroClasses
             IncreaseMageAttributesLevelByLevelUp();
             throw new NotImplementedException();
         }
-        public override void Equip(ArmorType chosenArmor)
-        {
-            if (chosenArmor == ArmorType.cloth)
-            {
-
-            }
-            throw new NotImplementedException();
-        }
-        public override void Equip(Weapons chosenWeapon)
-        {
-            if (chosenWeapon == Weapons.Staff || chosenWeapon == Weapons.Wand)
-            {
-
-            }
-            throw new NotImplementedException();
-        }
        
     }
 }

@@ -14,8 +14,8 @@ namespace RPGHeroes.Hero
         public int level { get; set; }
         public int levelAttributes { get; set; }
         public int equipment { get; set; }
-        public List<int> validWeaponTypes { get; set; }
-        public List<int> validArmorTypes { get; set; }
+        public List<Weapons> validWeaponTypes { get; set; }
+        public List<Armor> validArmors { get; set; }
         
         public Hero(string heroName)
         {
@@ -23,7 +23,13 @@ namespace RPGHeroes.Hero
             this.level = 1;
         }
         public abstract void LevelUp();
-        public abstract void Equip(ArmorType armor);
-        public abstract void Equip(Weapons weapon);
+        public void Equip(Armor armor)
+        {
+
+        }
+        public void Equip(Weapons weapon)
+        {
+
+        }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RPGHeroes.Item.Armor
 {
     
-        public enum ArmorType
+        public enum Armor
         {
             Leather,
             Plate,
