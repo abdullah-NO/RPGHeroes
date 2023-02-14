@@ -5,19 +5,18 @@ namespace RPGHeroes.Hero.HeroClasses
 {
     internal class MageClass : Hero
     {
-        public HeroAttribute mageAttribute = new();
+        public HeroAttribute mageAttribute;
         public MageClass(string mageName) : base(mageName)
         {
-            
-            mageAttribute.strength = 1; 
-            mageAttribute.dexterity = 1;
-            mageAttribute.intelligence = 8;
+            this.mageAttribute.strength = 1; 
+            this.mageAttribute.dexterity = 1;
+            this.mageAttribute.intelligence = 8;
         }
         private void IncreaseMageAttributesLevelByLevelUp()
         {
-            mageAttribute.strength += 1;
-            mageAttribute.dexterity += 1;
-            mageAttribute.intelligence += 5;
+            this.mageAttribute.strength += 1;
+            this.mageAttribute.dexterity += 1;
+            this.mageAttribute.intelligence += 5;
         }
         public override void LevelUp()
         {
