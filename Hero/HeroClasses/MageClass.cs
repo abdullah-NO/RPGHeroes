@@ -1,5 +1,5 @@
-﻿using RPGHeroes.Item.Armor;
-using RPGHeroes.Item.Weapon;
+﻿using RPGHeroes.Items.Armor;
+using RPGHeroes.Items.Weapon;
 
 namespace RPGHeroes.Hero.HeroClasses
 {
@@ -8,9 +8,8 @@ namespace RPGHeroes.Hero.HeroClasses
         public HeroAttribute mageAttribute;
         public MageClass(string mageName) : base(mageName)
         {
-            this.mageAttribute.strength = 1; 
-            this.mageAttribute.dexterity = 1;
-            this.mageAttribute.intelligence = 8;
+            HeroAttribute mageAttributesOnCreation = new(1, 1, 8);
+            mageAttribute = mageAttributesOnCreation;
         }
         private void IncreaseMageAttributesLevelByLevelUp()
         {
@@ -22,8 +21,16 @@ namespace RPGHeroes.Hero.HeroClasses
         {
             level++;
             IncreaseMageAttributesLevelByLevelUp();
-            throw new NotImplementedException();
         }
-       
+
+        public override List<Weapons> validWeaponTypes
+        {
+            get { return new List<Weapons> { Weapons.Wand, Weapons.Staff }; }
+        }
+        public override List<Armor> validArmorTypes
+        {
+            get { return new List<Armor> { Armor.cloth}; }
+        }
     }
 }
+

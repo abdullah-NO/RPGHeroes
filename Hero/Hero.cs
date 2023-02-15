@@ -1,5 +1,6 @@
-﻿using RPGHeroes.Item.Armor;
-using RPGHeroes.Item.Weapon;
+﻿using RPGHeroes.Items;
+using RPGHeroes.Items.Armor;
+using RPGHeroes.Items.Weapon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,9 @@ namespace RPGHeroes.Hero
         public string heroName { get; set; }
         public int level { get; set; }
         public int levelAttributes { get; set; }
-        public int equipment { get; set; }
-        public List<Weapons> validWeaponTypes { get; set; }
-        public List<Armor> validArmors { get; set; }
+        public Dictionary<slot?, Item> equipment { get; set; }
+        public virtual List<Weapons> validWeaponTypes { get; set; }
+        public  virtual List<Armor> validArmorTypes { get; set; }
         
         public Hero(string heroName)
         {
@@ -23,13 +24,24 @@ namespace RPGHeroes.Hero
             this.level = 1;
         }
         public abstract void LevelUp();
-        public void Equip(Armor armor)
+        public void Equip(ArmorClass armorObject, slot armorSlot)
+        {
+           if(armorSlot != slot.WeaponSlot)
+            {
+                if (IsValidArmorType(armorObject))
+                {
+
+                }
+            }
+
+        }
+        public void Equip(WeaponClass weapon)
         {
 
         }
-        public void Equip(Weapons weapon)
+        public bool IsValidArmorType(ArmorClass armorObject)
         {
-
+            return validArmorTypes.Contains(armorObject.armor);
         }
     }
 }
