@@ -3,7 +3,7 @@ using RPGHeroes.Items.Weapon;
 
 namespace RPGHeroes.Hero.HeroClasses
 {
-    internal class MageClass : Hero
+    public class MageClass : Hero
     {
         public HeroAttribute mageAttribute;
         public MageClass(string mageName) : base(mageName)
@@ -31,6 +31,7 @@ namespace RPGHeroes.Hero.HeroClasses
         {
             get { return new List<Armor> { Armor.cloth}; }
         }
+        
     }
 }
 

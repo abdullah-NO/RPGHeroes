@@ -1,4 +1,5 @@
-﻿using RPGHeroes.Items;
+﻿using RPGHeroes.Hero.HeroClasses;
+using RPGHeroes.Items;
 using RPGHeroes.Items.Armor;
 using RPGHeroes.Items.Weapon;
 using System;
@@ -15,7 +16,6 @@ namespace RPGHeroes.Hero
         public int level { get; set; }
         public int levelAttributes { get; set; }
         public Dictionary<slot, Item?> equipment { get; set; }
-        public List<Dictionary<slot, Item?>> equipmentList { get; set; }
         public virtual List<Weapons> validWeaponTypes { get; set; }
         public  virtual List<Armor> validArmorTypes { get; set; }
         
@@ -60,14 +60,11 @@ namespace RPGHeroes.Hero
             }
 
         }
-        public void Equip(WeaponClass weaponObject, slot weapon)
+        public void Equip(WeaponClass weaponObject)
         {
-            if (weapon == slot.WeaponSlot)
+            if (IsValidWeaponType(weaponObject,level))
             {
-                if (IsValidWeaponType(weaponObject))
-                {
-                    equipment.Add(weapon, weaponObject);
-                }
+                equipment[weaponObject.itemSlot] = weaponObject;
             }
         }
         public bool IsValidArmorType(ArmorClass armorObject,int heroLevel)
@@ -79,9 +76,91 @@ namespace RPGHeroes.Hero
             else 
                 return false;
         }
-        public bool IsValidWeaponType(WeaponClass weaponObject)
+        public bool IsValidWeaponType(WeaponClass weaponObject, int heroLevel)
         {
-            return validWeaponTypes.Contains(weaponObject.weapon);
+            if (heroLevel >= weaponObject.requiredLevel)
+            {
+                return validWeaponTypes.Contains(weaponObject.weapon);
+            }
+            else
+                return false;
+        }
+        public HeroAttribute CalculateSumOfEquipmentAttributes(Dictionary<slot, Item?> equipmentList)
+        {
+            HeroAttribute totalEquipmentAttributes = new HeroAttribute();
+            foreach (var keyValuePair in equipmentList) 
+            {
+                if(keyValuePair.Key != slot.WeaponSlot)
+                {
+                    ArmorClass? armor = keyValuePair.Value as ArmorClass;
+                    if (armor == null)
+                    {
+                        totalEquipmentAttributes.dexterity += 0;
+                        totalEquipmentAttributes.strength += 0;
+                        totalEquipmentAttributes.intelligence += 0;
+                    }
+                    else
+                    {
+                        totalEquipmentAttributes.addHeroAttributes(armor.armorAttribute);
+                    }
+                }
+            }
+            return totalEquipmentAttributes;
+        }
+        public HeroAttribute TotalAttributes(HeroAttribute totalEquipmentAttribute, HeroAttribute AttributeOfHero)
+        {
+            HeroAttribute? sumOfTotalHeroAttributes = null;
+            sumOfTotalHeroAttributes = AttributeOfHero.addHeroAttributes(totalEquipmentAttribute);
+            HeroDamage(sumOfTotalHeroAttributes, equipment);
+            return sumOfTotalHeroAttributes;
+        }
+        public double HeroDamage(HeroAttribute totalAttributes, Dictionary<slot, Item?> equipment)
+        {
+            if (this is MageClass)
+            {
+                if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
+                {
+                    return (weapon.weaponDamage + (totalAttributes.intelligence/100));
+                }
+                else 
+                {
+                    return (1 + (totalAttributes.intelligence / 100));
+                }
+            }
+            if (this is RangerClass)
+            {
+                if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
+                {
+                    return (weapon.weaponDamage + (totalAttributes.intelligence / 100));
+                }
+                else
+                {
+                    return (1 + (totalAttributes.intelligence / 100));
+                }
+            }
+            else if (this is RogueClass)
+            {
+                if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
+                {
+                    return (weapon.weaponDamage + (totalAttributes.intelligence / 100));
+                }
+                else
+                {
+                    return (1 + (totalAttributes.intelligence / 100));
+                }
+            }
+            else if (this is WarriorClass)
+            {
+                if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
+                {
+                    return (weapon.weaponDamage + (totalAttributes.intelligence / 100));
+                }
+                else
+                {
+                    return (1 + (totalAttributes.intelligence / 100));
+                }
+            }
+            return 0;
         }
     }
 }
