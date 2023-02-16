@@ -31,7 +31,7 @@ namespace RPGHeroes.Hero
 
            if(armorObject.itemSlot != slot.WeaponSlot)
             {
-                if (IsValidArmorType(armorObject))
+                if (IsValidArmorType(armorObject,level))
                 {
                     if (equipment.TryGetValue(armorObject.itemSlot, out var currentItem) && currentItem != null)
                     {
@@ -70,9 +70,14 @@ namespace RPGHeroes.Hero
                 }
             }
         }
-        public bool IsValidArmorType(ArmorClass armorObject)
+        public bool IsValidArmorType(ArmorClass armorObject,int heroLevel)
         {
-            return validArmorTypes.Contains(armorObject.armor);
+            if (heroLevel >= armorObject.requiredLevel)
+            {
+                return validArmorTypes.Contains(armorObject.armor);
+            }
+            else 
+                return false;
         }
         public bool IsValidWeaponType(WeaponClass weaponObject)
         {
