@@ -15,6 +15,7 @@ namespace RPGHeroes.Hero
         public int level { get; set; }
         public int levelAttributes { get; set; }
         public Dictionary<slot, Item?> equipment { get; set; }
+        public List<Dictionary<slot, Item?>> equipmentList { get; set; }
         public virtual List<Weapons> validWeaponTypes { get; set; }
         public  virtual List<Armor> validArmorTypes { get; set; }
         
@@ -32,8 +33,29 @@ namespace RPGHeroes.Hero
             {
                 if (IsValidArmorType(armorObject))
                 {
-                    
-                    equipment.Add(armorObject.itemSlot, armorObject);
+                    if (equipment.TryGetValue(armorObject.itemSlot, out var currentItem) && currentItem != null)
+                    {
+                        equipment[armorObject.itemSlot] = armorObject;
+                    }
+                    else
+                    {
+                        equipment.Add(armorObject.itemSlot, armorObject);
+                    }
+
+
+                    //if (equipment.ContainsKey(armorObject.itemSlot) && equipment[armorObject.itemSlot] is armorObject != null)
+                    //{
+                    //    // The slot contains a non-null ArmorClass object
+                    //    // Do something with the ArmorClass object
+                    //}
+                    //if (armorObject != null && level >= armorObject.requiredLevel)
+                    //{
+                    //    equipment[armorObject.itemSlot] = armorObject;
+                    //}
+                    //if (armorObject == null && level >= armorObject.requiredLevel)
+                    //{
+                    //    equipment.Add(armorObject.itemSlot, armorObject);
+                    //}
                 }
             }
 
