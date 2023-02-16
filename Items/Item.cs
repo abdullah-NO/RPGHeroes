@@ -11,16 +11,16 @@ namespace RPGHeroes.Items
         
         public string itemName { get; set; }
         public int requiredLevel { get; set; }
-        public slot heroSlot { get; set; }
+        public slot itemSlot { get; set; }
 
         public Item()
         {
 
         }
-        public Item(string itemName, slot heroSlot)
+        public Item(string itemName, slot itemSlot)
         {
             this.itemName = itemName;
-            this.heroSlot = heroSlot;
+            this.itemSlot = itemSlot;
         }
         public Item(string itemName)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RPGHeroes.Hero.HeroClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,8 @@ namespace RPGHeroes.Items.Armor
     public class ArmorClass : Item
     {
         public Armor armor { get; set; }
-        public ArmorClass(Armor armor , string armorName) : base(armorName)
+        public HeroAttribute armorAttribute { get; set; }
+        public ArmorClass(Armor armor , string armorName, slot armorSlot) : base(armorName,armorSlot)
         {
                this.armor = armor;
                SetArmorAttributesAndRequiredLevel(armor); 

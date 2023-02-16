@@ -14,34 +14,47 @@ namespace RPGHeroes.Hero
         public string heroName { get; set; }
         public int level { get; set; }
         public int levelAttributes { get; set; }
-        public Dictionary<slot?, Item> equipment { get; set; }
+        public Dictionary<slot, Item?> equipment { get; set; }
         public virtual List<Weapons> validWeaponTypes { get; set; }
         public  virtual List<Armor> validArmorTypes { get; set; }
         
         public Hero(string heroName)
         {
             this.heroName = heroName;
+            equipment= new Dictionary<slot, Item?>();
             this.level = 1;
         }
         public abstract void LevelUp();
-        public void Equip(ArmorClass armorObject, slot armorSlot)
+        public void Equip(ArmorClass armorObject)
         {
-           if(armorSlot != slot.WeaponSlot)
+
+           if(armorObject.itemSlot != slot.WeaponSlot)
             {
                 if (IsValidArmorType(armorObject))
                 {
-
+                    
+                    equipment.Add(armorObject.itemSlot, armorObject);
                 }
             }
 
         }
-        public void Equip(WeaponClass weapon)
+        public void Equip(WeaponClass weaponObject, slot weapon)
         {
-
+            if (weapon == slot.WeaponSlot)
+            {
+                if (IsValidWeaponType(weaponObject))
+                {
+                    equipment.Add(weapon, weaponObject);
+                }
+            }
         }
         public bool IsValidArmorType(ArmorClass armorObject)
         {
             return validArmorTypes.Contains(armorObject.armor);
+        }
+        public bool IsValidWeaponType(WeaponClass weaponObject)
+        {
+            return validWeaponTypes.Contains(weaponObject.weapon);
         }
     }
 }
