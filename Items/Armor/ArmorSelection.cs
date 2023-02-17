@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGHeroes.Item.Armor
+namespace RPGHeroes.Items.Armor
 {
     
-        public enum ArmorType
+        public enum Armor
         {
             Leather,
             Plate,

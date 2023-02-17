@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGHeroes.Item.Weapon
+namespace RPGHeroes.Items.Weapon
 {
-    {
        public enum Weapons
         {
             Axe,
@@ -16,6 +15,5 @@ namespace RPGHeroes.Item.Weapon
             Staff,
             Sword,
             Wand
-        }
-    }
+        } 
 }
