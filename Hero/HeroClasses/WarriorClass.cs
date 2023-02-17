@@ -18,7 +18,6 @@ namespace RPGHeroes.Hero.HeroClasses
         }
         private void IncreaseWarriorAttributesLevelByLevelUp()
         {
-
             levelAttributes.strength += 1;
             levelAttributes.dexterity += 5;
             levelAttributes.intelligence += 1;

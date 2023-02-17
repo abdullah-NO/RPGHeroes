@@ -121,48 +121,49 @@ namespace RPGHeroes.Hero
         }
         public double HeroDamage(HeroAttribute totalAttributes, Dictionary<slot, Item?> equipment)
         {
+            int unequipped = 1;
             if (this is MageClass)
             {
                 if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
                 {
-                    return (weapon.weaponDamage + (totalAttributes.intelligence/100));
+                    return weapon.weaponDamage * (1+ (totalAttributes.intelligence/100));
                 }
                 else 
                 {
-                    return (1 + (totalAttributes.intelligence / 100));
+                    return (unequipped * (totalAttributes.intelligence / 100));
                 }
             }
             if (this is RangerClass)
             {
                 if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
                 {
-                    return (weapon.weaponDamage + (totalAttributes.intelligence / 100));
+                    return (weapon.weaponDamage * (1 + (totalAttributes.intelligence / 100)));
                 }
                 else
                 {
-                    return (1 + (totalAttributes.intelligence / 100));
+                    return (unequipped * (totalAttributes.intelligence / 100));
                 }
             }
             else if (this is RogueClass)
             {
                 if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
                 {
-                    return (weapon.weaponDamage + (totalAttributes.intelligence / 100));
+                    return (weapon.weaponDamage * (1 + (totalAttributes.intelligence / 100)));
                 }
                 else
                 {
-                    return (1 + (totalAttributes.intelligence / 100));
+                    return (unequipped * (totalAttributes.intelligence / 100));
                 }
             }
             else if (this is WarriorClass)
             {
                 if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
                 {
-                    return (weapon.weaponDamage + (totalAttributes.intelligence / 100));
+                    return (weapon.weaponDamage * (1 + (totalAttributes.intelligence / 100)));
                 }
                 else
                 {
-                    return (1 + (totalAttributes.intelligence / 100));
+                    return (unequipped * (totalAttributes.intelligence / 100));
                 }
             }
             return 0;
