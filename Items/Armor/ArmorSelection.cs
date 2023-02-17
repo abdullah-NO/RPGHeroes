@@ -11,7 +11,7 @@ namespace RPGHeroes.Items.Armor
         {
             Leather,
             Plate,
-            Chainmail,
-            cloth
+            Mail,
+            Cloth
         }
 }

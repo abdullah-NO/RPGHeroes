@@ -29,7 +29,7 @@ namespace RPGHeroes.Hero.HeroClasses
         }
         public override List<Armor> validArmorTypes
         {
-            get { return new List<Armor> { Armor.cloth}; }
+            get { return new List<Armor> { Armor.Cloth}; }
         }
         public override string ClassName
         {

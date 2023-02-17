@@ -35,13 +35,13 @@ namespace RPGHeroes.Items.Armor
                     this.armorAttribute.intelligence = 1;
                     requiredLevel = 3;
                     break;
-                case Armor.Chainmail:
+                case Armor.Mail:
                     this.armorAttribute.dexterity = 2;
                     this.armorAttribute.strength = 2;
                     this.armorAttribute.intelligence = 1;
                     requiredLevel = 2;
                     break;
-                case Armor.cloth:
+                case Armor.Cloth:
                     this.armorAttribute.dexterity = 3;
                     this.armorAttribute.strength = 1;
                     this.armorAttribute.intelligence= 3;
