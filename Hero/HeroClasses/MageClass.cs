@@ -4,18 +4,18 @@ using RPGHeroes.Items.Weapon;
 namespace RPGHeroes.Hero.HeroClasses
 {
     public class MageClass : Hero
-    {
-        public HeroAttribute mageAttribute;
+    { 
         public MageClass(string mageName) : base(mageName)
         {
             HeroAttribute mageAttributesOnCreation = new(1, 1, 8);
-            mageAttribute = mageAttributesOnCreation;
+            levelAttributes = mageAttributesOnCreation;
         }
         private void IncreaseMageAttributesLevelByLevelUp()
         {
-            this.mageAttribute.strength += 1;
-            this.mageAttribute.dexterity += 1;
-            this.mageAttribute.intelligence += 5;
+            
+            levelAttributes.strength += 1;
+            levelAttributes.dexterity += 1;
+            levelAttributes.intelligence += 5;
         }
         public override void LevelUp()
         {
@@ -31,7 +31,11 @@ namespace RPGHeroes.Hero.HeroClasses
         {
             get { return new List<Armor> { Armor.cloth}; }
         }
-        
+        public override string ClassName
+        {
+            get { return "Mage"; }
+        }
+
     }
 }
 

@@ -5,8 +5,12 @@ using RPGHeroes.Items.Weapon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
 
 namespace RPGHeroes.Hero
 {
@@ -14,8 +18,9 @@ namespace RPGHeroes.Hero
     {
         public string heroName { get; set; }
         public int level { get; set; }
-        public int levelAttributes { get; set; }
+        public HeroAttribute levelAttributes { get; set; }
         public Dictionary<slot, Item?> equipment { get; set; }
+        public abstract string ClassName { get; }
         public virtual List<Weapons> validWeaponTypes { get; set; }
         public  virtual List<Armor> validArmorTypes { get; set; }
         
@@ -30,7 +35,7 @@ namespace RPGHeroes.Hero
         {
 
            if(armorObject.itemSlot != slot.WeaponSlot)
-            {
+           {
                 if (IsValidArmorType(armorObject,level))
                 {
                     if (equipment.TryGetValue(armorObject.itemSlot, out var currentItem) && currentItem != null)
@@ -57,7 +62,7 @@ namespace RPGHeroes.Hero
                     //    equipment.Add(armorObject.itemSlot, armorObject);
                     //}
                 }
-            }
+           }
 
         }
         public void Equip(WeaponClass weaponObject)
@@ -161,6 +166,21 @@ namespace RPGHeroes.Hero
                 }
             }
             return 0;
+        }
+        public string DisplayHeroStats()
+        {
+            HeroAttribute totalAttributes = TotalAttributes(CalculateSumOfEquipmentAttributes(equipment), levelAttributes);
+            double totalHeroDamage = HeroDamage(TotalAttributes(CalculateSumOfEquipmentAttributes(equipment), levelAttributes), equipment);
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Name: {heroName}");
+            sb.AppendLine($"Class: {ClassName}"); 
+            sb.AppendLine($"Level: {level}");
+            sb.AppendLine($"Total Strength: {totalAttributes.strength}");
+            sb.AppendLine($"Total Dexterity: {totalAttributes.dexterity}");
+            sb.AppendLine($"Total Intelligence: {totalAttributes.intelligence}");
+            sb.AppendLine($"Damage: {totalHeroDamage}");
+            return sb.ToString();
         }
     }
 }
