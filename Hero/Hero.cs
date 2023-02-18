@@ -14,7 +14,7 @@ using System.Xml.Linq;
 
 namespace RPGHeroes.Hero
 {
-     public abstract class Hero
+    public abstract class Hero
     {
         public string heroName { get; set; }
         public int level { get; set; }

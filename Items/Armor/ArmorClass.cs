@@ -1,4 +1,4 @@
-﻿using RPGHeroes.Hero.HeroClasses;
+﻿using RPGHeroes.Hero;
 using System;
 using System.Collections.Generic;
 using System.Linq;

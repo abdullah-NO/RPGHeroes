@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RPGHeroes.Hero.HeroClasses
+namespace RPGHeroes.Hero
 {
     public class HeroAttribute
     {
@@ -24,12 +24,12 @@ namespace RPGHeroes.Hero.HeroClasses
             this.dexterity = dexterity;
             this.intelligence = intelligence;
         }
-        
+
         public HeroAttribute addHeroAttributes(HeroAttribute attributes)
         {
-            this.strength+= attributes.strength;
-            this.dexterity+= attributes.dexterity;
-            this.intelligence+= attributes.intelligence;
+            strength += attributes.strength;
+            dexterity += attributes.dexterity;
+            intelligence += attributes.intelligence;
             return this;
         }
     }
