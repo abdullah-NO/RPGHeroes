@@ -9,12 +9,12 @@ namespace RPGHeroes.Items.Weapon
     public class WeaponClass : Item
     {
         public int weaponDamage { get; set; }
-        public Weapons weapon { get; set; }
+        public Weapons weaponType { get; set; }
 
         public WeaponClass(Weapons weapon, string weaponName) : base(weaponName)
         {
-                this.weapon = weapon;
-                SetWeaponDamageAndRequiredLevel(this.weapon);
+                this.weaponType = weapon;
+                SetWeaponDamageAndRequiredLevel(this.weaponType);
                 itemSlot = slot.WeaponSlot;
         }
         private void SetWeaponDamageAndRequiredLevel(Weapons weapon)

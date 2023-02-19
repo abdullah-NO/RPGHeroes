@@ -13,10 +13,6 @@ namespace RPGHeroes.Items
         public int requiredLevel { get; set; }
         public slot itemSlot { get; set; }
 
-        public Item()
-        {
-
-        }
         public Item(string itemName, slot itemSlot)
         {
             this.itemName = itemName;
@@ -26,7 +22,5 @@ namespace RPGHeroes.Items
         {
             this.itemName = itemName;
         }
-
-
     }
 }

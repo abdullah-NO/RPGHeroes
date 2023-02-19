@@ -47,20 +47,6 @@ namespace RPGHeroes.Hero
                         equipment.Add(armorObject.itemSlot, armorObject);
                     }
 
-
-                    //if (equipment.ContainsKey(armorObject.itemSlot) && equipment[armorObject.itemSlot] is armorObject != null)
-                    //{
-                    //    // The slot contains a non-null ArmorClass object
-                    //    // Do something with the ArmorClass object
-                    //}
-                    //if (armorObject != null && level >= armorObject.requiredLevel)
-                    //{
-                    //    equipment[armorObject.itemSlot] = armorObject;
-                    //}
-                    //if (armorObject == null && level >= armorObject.requiredLevel)
-                    //{
-                    //    equipment.Add(armorObject.itemSlot, armorObject);
-                    //}
                 }
            }
 
@@ -76,7 +62,7 @@ namespace RPGHeroes.Hero
         {
             if (heroLevel >= armorObject.requiredLevel)
             {
-                return validArmorTypes.Contains(armorObject.armor);
+                return validArmorTypes.Contains(armorObject.armorType);
             }
             else 
                 return false;
@@ -85,7 +71,7 @@ namespace RPGHeroes.Hero
         {
             if (heroLevel >= weaponObject.requiredLevel)
             {
-                return validWeaponTypes.Contains(weaponObject.weapon);
+                return validWeaponTypes.Contains(weaponObject.weaponType);
             }
             else
                 return false;
