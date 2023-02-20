@@ -45,7 +45,7 @@ namespace RPGHeroesTest.HeroTests
             HeroAttribute ExpectedTotalAttribute = new HeroAttribute(1,1,8);
 
             //ACT + Assert
-            Assert.Equivalent(ExpectedTotalAttribute,mage.TotalAttributes(mage.CalculateSumOfEquipmentAttributes(), mage.levelAttributes));
+            Assert.Equivalent(ExpectedTotalAttribute,mage.TotalAttributes());
             
         }
 
@@ -62,7 +62,7 @@ namespace RPGHeroesTest.HeroTests
             mage.Equip(armor);
 
             //Assert
-            Assert.Equivalent(ExpectedTotalAttribute, mage.TotalAttributes(mage.CalculateSumOfEquipmentAttributes(), mage.levelAttributes));
+            Assert.Equivalent(ExpectedTotalAttribute, mage.TotalAttributes());
 
         }
 
@@ -81,8 +81,110 @@ namespace RPGHeroesTest.HeroTests
             mage.Equip(armorCloth2);
 
             //Assert
-            Assert.Equivalent(ExpectedTotalAttribute, mage.TotalAttributes(mage.CalculateSumOfEquipmentAttributes(), mage.levelAttributes));
+            Assert.Equivalent(ExpectedTotalAttribute, mage.TotalAttributes());
+        }
+
+        [Fact]
+        public void ExpectCorrectTotalAttributesOnReplacedArmorEquipment()
+        {
+            //Arrange
+            RogueClass rogue = new RogueClass("Abu - the rogue");
+            HeroAttribute ExpectedTotalAttribute = new HeroAttribute(5, 14, 3);
+            ArmorClass armorLeather = new ArmorClass(Armor.Leather, "BatmanSuit", slot.Body);
+            ArmorClass armorMail = new ArmorClass(Armor.Mail, "You got Mail", slot.Body);
+            rogue.Equip(armorLeather);
+            rogue.LevelUp();
+
+            //ACT
+            rogue.Equip(armorMail);
+
+            //Assert
+            Assert.Equivalent(ExpectedTotalAttribute, rogue.TotalAttributes());
+        }
+
+        //Not Finished
+        [Fact]
+        public void ExpectCorrectTotalDamageOnNoEquipment()
+        {
+            //Arrange
+            decimal ExpectedTotalDamage = 1.070M;
+            HeroAttribute ExpectedAttribute = new(1, 7, 1);
+
+            RogueClass rogue = new RogueClass("Abu - the rogue");
+
+            //ACT 
+            decimal totalDamage = rogue.HeroDamage(rogue.TotalAttributes());
+
+
+            //Assert
+            Assert.Equal(ExpectedTotalDamage, totalDamage);
+        }
+
+        
+        [Fact]
+        public void ExpectCorrectTotalDamageWithWeaponAndArmorEquipment()
+        {
+            //Arrange
+            RogueClass rogue = new RogueClass("Abu - the rogue");
+            HeroAttribute ExpectedTotalAttribute = new HeroAttribute(5, 14, 3);
+            ArmorClass armorLeather = new ArmorClass(Armor.Leather, "BatmanSuit", slot.Body);
+            ArmorClass armorMail = new ArmorClass(Armor.Mail, "You got Mail", slot.Body);
+            rogue.Equip(armorLeather);
+            rogue.LevelUp();
+
+            //ACT
+            rogue.Equip(armorMail);
+
+            //Assert
+            Assert.Equivalent(ExpectedTotalAttribute, rogue.TotalAttributes());
+        }
+
+        [Fact]
+        public void ExpectCorrectInfoDisplayForHeroClassName()
+        {
 
         }
+
+
+        [Fact]
+        public void ExpectCorrectInfoDisplayForHeroName()
+        {
+
+        }
+
+
+        [Fact]
+        public void ExpectCorrectInfoDisplayForHeroLevel()
+        {
+
+        }
+
+
+        [Fact]
+        public void ExpectCorrectInfoDisplayForHeroTotalStrength()
+        {
+
+        }
+
+
+        [Fact]
+        public void ExpectCorrectInfoDisplayForHeroTotalDexterity()
+        {
+
+        }
+
+        [Fact]
+        public void ExpectCorrectInfoDisplayForHeroTotalIntelligence()
+        {
+
+        }
+
+        [Fact]
+        public void ExpectCorrectInfoDisplayForHeroDamage()
+        {
+
+        }
+
+
     }
 }

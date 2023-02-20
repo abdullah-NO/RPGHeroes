@@ -102,66 +102,66 @@ namespace RPGHeroes.Hero
             }
             return totalEquipmentAttributes;
         }
-        public HeroAttribute TotalAttributes(HeroAttribute totalEquipmentAttribute, HeroAttribute AttributeOfHero)
+        public HeroAttribute TotalAttributes()
         {
-            HeroAttribute? sumOfTotalHeroAttributes = null;
-            sumOfTotalHeroAttributes = AttributeOfHero.addHeroAttributes(totalEquipmentAttribute);
-            HeroDamage(sumOfTotalHeroAttributes, equipment);
-            return sumOfTotalHeroAttributes;
+            HeroAttribute totalEquipmentAttributes = CalculateSumOfEquipmentAttributes();
+            HeroAttribute? sumOfTotalHeroAttributesAndTotalEquipmentAttributes = null;
+            sumOfTotalHeroAttributesAndTotalEquipmentAttributes = levelAttributes.addHeroAttributes(totalEquipmentAttributes);
+            return sumOfTotalHeroAttributesAndTotalEquipmentAttributes;
         }
-        public double HeroDamage(HeroAttribute totalAttributes, Dictionary<slot, Item?> equipment)
+        public decimal HeroDamage(HeroAttribute sumOfTotalHeroAttributesAndTotalEquipmentAttributes)
         {
             int unequipped = 1;
             if (this is MageClass)
             {
                 if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
                 {
-                    return weapon.weaponDamage * (1+ (totalAttributes.intelligence/100));
+                    return Math.Round(Convert.ToDecimal(weapon.weaponDamage * (1+ (sumOfTotalHeroAttributesAndTotalEquipmentAttributes.intelligence/100))),3);
                 }
                 else 
                 {
-                    return (unequipped * (totalAttributes.intelligence / 100));
+                    return Math.Round(Convert.ToDecimal(unequipped * (1+(sumOfTotalHeroAttributesAndTotalEquipmentAttributes.intelligence / 100))),3);
                 }
             }
             if (this is RangerClass)
             {
                 if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
                 {
-                    return (weapon.weaponDamage * (1 + (totalAttributes.intelligence / 100)));
+                    return Math.Round(Convert.ToDecimal(weapon.weaponDamage * (1 + (sumOfTotalHeroAttributesAndTotalEquipmentAttributes.dexterity / 100))), 3);
                 }
                 else
                 {
-                    return (unequipped * (totalAttributes.intelligence / 100));
+                    return Math.Round(Convert.ToDecimal(unequipped * (1 + (sumOfTotalHeroAttributesAndTotalEquipmentAttributes.dexterity / 100))), 3);
                 }
             }
             else if (this is RogueClass)
             {
                 if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
                 {
-                    return (weapon.weaponDamage * (1 + (totalAttributes.intelligence / 100)));
+                    return Math.Round(Convert.ToDecimal(weapon.weaponDamage * (1 + (sumOfTotalHeroAttributesAndTotalEquipmentAttributes.dexterity / 100))), 3);
                 }
                 else
                 {
-                    return (unequipped * (totalAttributes.intelligence / 100));
+                    return Math.Round(Convert.ToDecimal(unequipped * (1 + (sumOfTotalHeroAttributesAndTotalEquipmentAttributes.dexterity / 100))), 3);
                 }
             }
             else if (this is WarriorClass)
             {
                 if (equipment.TryGetValue(slot.WeaponSlot, out var item) && item is WeaponClass weapon)
                 {
-                    return (weapon.weaponDamage * (1 + (totalAttributes.intelligence / 100)));
+                    return Math.Round(Convert.ToDecimal(weapon.weaponDamage * (1 + (sumOfTotalHeroAttributesAndTotalEquipmentAttributes.strength / 100))), 3);
                 }
                 else
                 {
-                    return (unequipped * (totalAttributes.intelligence / 100));
+                    return Math.Round(Convert.ToDecimal(unequipped * (1 + (sumOfTotalHeroAttributesAndTotalEquipmentAttributes.strength / 100))), 3);
                 }
             }
             return 0;
         }
         public string DisplayHeroStats()
         {
-            HeroAttribute totalAttributes = TotalAttributes(CalculateSumOfEquipmentAttributes(), levelAttributes);
-            double totalHeroDamage = HeroDamage(TotalAttributes(CalculateSumOfEquipmentAttributes(), levelAttributes), equipment);
+            HeroAttribute totalAttributes = TotalAttributes();
+            decimal totalHeroDamage = HeroDamage(totalAttributes);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Name: {heroName}");
