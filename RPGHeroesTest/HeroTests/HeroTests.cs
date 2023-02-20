@@ -12,13 +12,17 @@ namespace RPGHeroesTest.HeroTests
 {
     public class HeroTests
     {
-        //Arrange
-       // MageClass mage = new MageClass("Abu - the mage");
-        //ArmorClass armor = new ArmorClass(Armor.Mail, "poor mans mail", slot.Body);
+        [Fact]
+        public void ExpectCorrectExceptionThrownOnInvalidArmorEquipment()
+        {
+            //Arrange
+            MageClass mage = new MageClass("Abu - the mage");
+            ArmorClass armor = new ArmorClass(Armor.Mail, "poor mans mail", slot.Body);
 
 
-        //Act+Assert
-        //Exception ex = Assert.Throws<EquipItemException>(() => mage.Equip(armor));
+            //Act + Assert
+            Exception ex = Assert.Throws<EquipItemException>(() => mage.Equip(armor));
 
+        }
     }
 }
