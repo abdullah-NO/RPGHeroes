@@ -36,14 +36,7 @@ namespace RPGHeroes.Hero
 
            if(armorObject.itemSlot != slot.WeaponSlot)
            {
-
-
-
-                if (!IsValidArmorType(armorObject, level))
-                {
-                    throw new EquipItemException($"the Armor is not available for {ClassName} or the required level for the Armor is to high");
-                }
-                else
+                if (IsValidArmorType(armorObject, level))
                 {
                     if (equipment.TryGetValue(armorObject.itemSlot, out var currentItem) && currentItem != null)
                     {
@@ -55,18 +48,6 @@ namespace RPGHeroes.Hero
                     }
                 }
 
-                //if (IsValidArmorType(armorObject, level))
-                //{
-                //    if (equipment.TryGetValue(armorObject.itemSlot, out var currentItem) && currentItem != null)
-                //    {
-                //        equipment[armorObject.itemSlot] = armorObject;
-                //    }
-                //    else
-                //    {
-                //        equipment.Add(armorObject.itemSlot, armorObject);
-                //    }
-
-                //}
             }
 
         }
@@ -74,11 +55,12 @@ namespace RPGHeroes.Hero
         {
             if(!IsValidWeaponType(weaponObject,level))
             {
-                throw new EquipItemException($"the weapon is not available for {ClassName} or the required level for the weapon is to high");
+                equipment[weaponObject.itemSlot] = weaponObject;
+                
             }
             else 
             {
-                equipment[weaponObject.itemSlot] = weaponObject;
+               
             }
         }
         public bool IsValidArmorType(ArmorClass armorObject,int heroLevel)
@@ -88,27 +70,20 @@ namespace RPGHeroes.Hero
                 throw new EquipItemException($"The armor is not available for {this.ClassName} or the required level for the armor is too high");
             }
             return true;
-
-            //if (heroLevel >= armorObject.requiredLevel)
-            //{
-            //    return validArmorTypes.Contains(armorObject.armorType);
-            //}
-            //else 
-            //    return false;
         }
         public bool IsValidWeaponType(WeaponClass weaponObject, int heroLevel)
         {
-            if (heroLevel >= weaponObject.requiredLevel)
+            if (heroLevel < weaponObject.requiredLevel || !validWeaponTypes.Contains(weaponObject.weaponType))
             {
-                return validWeaponTypes.Contains(weaponObject.weaponType);
+                throw new EquipItemException($"the weapon is not available for {ClassName} or the required level for the weapon is to high");
             }
             else
-                return false;
+                return true;
         }
-        public HeroAttribute CalculateSumOfEquipmentAttributes(Dictionary<slot, Item?> equipmentList)
+        public HeroAttribute CalculateSumOfEquipmentAttributes()
         {
             HeroAttribute totalEquipmentAttributes = new HeroAttribute();
-            foreach (var keyValuePair in equipmentList) 
+            foreach (var keyValuePair in equipment) 
             {
                 if(keyValuePair.Key != slot.WeaponSlot)
                 {
@@ -185,8 +160,8 @@ namespace RPGHeroes.Hero
         }
         public string DisplayHeroStats()
         {
-            HeroAttribute totalAttributes = TotalAttributes(CalculateSumOfEquipmentAttributes(equipment), levelAttributes);
-            double totalHeroDamage = HeroDamage(TotalAttributes(CalculateSumOfEquipmentAttributes(equipment), levelAttributes), equipment);
+            HeroAttribute totalAttributes = TotalAttributes(CalculateSumOfEquipmentAttributes(), levelAttributes);
+            double totalHeroDamage = HeroDamage(TotalAttributes(CalculateSumOfEquipmentAttributes(), levelAttributes), equipment);
 
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Name: {heroName}");
